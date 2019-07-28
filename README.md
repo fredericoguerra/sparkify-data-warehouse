@@ -5,11 +5,9 @@
 Sparkify is a grower music streaming startup which aims to move their processes and data onto the cloud. Their data resides in S3, in two directories consisting of a JSON logs on the app users activities, as well as a JSON metadata with songs in their app.
 
 This is an example of what a single song file looks like:
-<html>
-    <head>
+```
         {"num_songs": 1, "artist_id": "ARJIE2Y1187B994AB7", "artist_latitude": null, "artist_longitude": null, "artist_location": "", "artist_name": "Line Renaud", "song_id": "SOUPIRU12A6D4FA1E1", "title": "Der Kleine Dompfaff", "duration": 152.92036, "year": 0}
-    </head>
-</html>
+```
 
 This is an example of what a single log file looks like:
 ![log dat](/log-data.png)
@@ -54,14 +52,10 @@ This repository contains an ETL pipeline that extracts their data from those JSO
 
 ## How to run
 
-<html>
-    <head>
+```
          python3 create_tables.py
-    </head>
-</html>
+```
 
-<html>
-    <head>
+```
          python3 etl.py
-    </head>
-</html>
+```
