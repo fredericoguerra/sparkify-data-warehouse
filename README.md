@@ -8,12 +8,9 @@ This is an example of what a single song and log files looks like:
 
 ### Songs:
 Each song json file contains information about the song and artist such as the title, artist Id, location, name and duration of the song.
-<html>
-    <head>
-        {"num_songs": 1, "artist_id": "ARJIE2Y1187B994AB7", "artist_latitude": null, "artist_longitude": null, "artist_location": "", "artist_name": "Line Renaud", "song_id": "SOUPIRU12A6D4FA1E1", "title": "Der Kleine Dompfaff", "duration": 152.92036, "year": 0}
-    </head>
-</html>
-
+```python
+{"num_songs": 1, "artist_id": "ARJIE2Y1187B994AB7", "artist_latitude": null, "artist_longitude": null, "artist_location": "", "artist_name": "Line Renaud", "song_id": "SOUPIRU12A6D4FA1E1", "title": "Der Kleine Dompfaff", "duration": 152.92036, "year": 0}
+```
 ### Logs:
 Each line of this json brings information about the users (name, gender, location and account payment level), artists, song's title, page in the app and time.
 ![log dat](/images/log-data.png)
@@ -63,42 +60,33 @@ The data warehouse is based on PySpark (Apache Spark with Python) in order to op
 
 ## How to run and create the database
 
-<html>
-    <head>
-        $ python3 create_tables.py
-    </head>
-</html>
-
-<html>
-    <head>
-        $ python3 etl.py
-    </head>
-</html>
+```
+         python3 create_tables.py
+```
+```
+         python3 etl.py
+```
 
 ## Example queries
 
 ### 10 Most Popular songs over time
 
-<html>
-    <head>
+```
         SELECT sp.title, count(*) as count
         FROM songplays sp
         INNER JOIN songs s ON s.song_id = sp.song_id
         GROUP BY s.title
         ORDER BY count DESC, s.title ASC
         LIMIT 10
-    </head>
-</html>
+```
 
 ### 10 Most Popular artists and their songs over time
 
-<html>
-    <head>
+```
         SELECT ar.name, s.title, count(*) as count
         FROM songplays sp
         INNER JOIN songs s ON s.song_id = sp.song_id
         INNER JOIN artists ar ON ar.artist_id = sp.artist_id
         GROUP BY ar.name, s.title
         ORDER BY count DESC, ar.name, s.title ASC;
-    </head>
-</html>
+```
