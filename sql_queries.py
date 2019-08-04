@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS dist.staging_events
     sessionId       INTEGER,
     song            VARCHAR(MAX),
     status          INTEGER,
-    ts              BIGINT,
+    ts              VARCHAR(MAX),
     userAgent       VARCHAR(MAX),
     userId          INTEGER
     )
@@ -66,7 +66,7 @@ songplay_table_create = ("""
     CREATE TABLE IF NOT EXISTS dist.songplays
     (
     songplay_id  INTEGER      IDENTITY(0,1) PRIMARY KEY,
-    start_time   VARCHAR(MAX) NOT NULL REFERENCES dist.time(start_time) SORTKEY,
+    start_time   TIMESTAMP NOT NULL REFERENCES dist.time(start_time) SORTKEY,
     user_id      INTEGER      NOT NULL REFERENCES dist.users(user_id),
     level        VARCHAR(MAX) NOT NULL,
     song_id      VARCHAR(MAX) NOT NULL REFERENCES dist.songs(song_id),
@@ -81,7 +81,7 @@ songplay_table_create = ("""
 user_table_create = ("""
     CREATE TABLE IF NOT EXISTS dist.users
     (
-    user_id     INTEGER     NOT NULL   PRIMARY KEY SORTKEY,
+    user_id     INTEGER   PRIMARY KEY SORTKEY,
     first_name  VARCHAR(MAX) NOT NULL,
     last_name   VARCHAR(MAX) NOT NULL,
     gender      VARCHAR(MAX) NOT NULL,
@@ -93,7 +93,7 @@ user_table_create = ("""
 song_table_create = ("""
     CREATE TABLE IF NOT EXISTS dist.songs
     (
-    song_id     VARCHAR(MAX) NOT NULL  PRIMARY KEY SORTKEY,
+    song_id     VARCHAR(MAX) PRIMARY KEY SORTKEY,
     title       VARCHAR(MAX) NOT NULL,
     artist_id   VARCHAR(MAX) NOT NULL REFERENCES artists(artist_id),
     year        INTEGER      NOT NULL,
